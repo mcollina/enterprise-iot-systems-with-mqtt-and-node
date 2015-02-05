@@ -22,7 +22,15 @@ var lux = require('./lux');
 
 mqtt.on('connect', function() {
   console.log('connected to', broker);
+  mqtt.subscribe('$SYS/#/publish/received');
 });
+
+mqtt.on('message', function(topic, payload) {
+  var el = document.querySelector("#broker-stats");
+  if (topic.indexOf('publish/received') >= 0) {
+    el.textContent = "Total messages " + payload.toString();
+  }
+})
 
 // Bespoke.js
 bespoke.from('article', [
