@@ -11,8 +11,18 @@ var bespoke = require('bespoke'),
   progress = require('bespoke-progress'),
   run = require('bespoke-run'),
   camera = require('bespoke-camera'),
-  mqtt = require('mqtt'),
+  jQuery = require('jquery')
+  broker = 'ws://test.mosca.io:80',
+  mqtt = require('mqtt').connect(broker),
   forms = require('bespoke-forms');
+
+global.jQuery = jQuery;
+global.$ = jQuery;
+var lux = require('./lux');
+
+mqtt.on('connect', function() {
+  console.log('connected to', broker);
+});
 
 // Bespoke.js
 bespoke.from('article', [
@@ -26,7 +36,8 @@ bespoke.from('article', [
   scale(),
   hash(),
   progress(),
-  forms()
+  forms(),
+  lux(mqtt)
 ]);
 
 // Prism syntax highlighting
