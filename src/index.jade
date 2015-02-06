@@ -44,11 +44,68 @@ html
         img(src='images/overview.png' style="width: 100%")
 
       section
-        h2 Acquiring data!
+        h2 Architecture
+        img(src='images/puzzle.png' style="width: 100%")
+
+      section
+        h2 Sensor Data Flow
+        img(src='images/sensor data.png' style="width: 100%")
+
+      section
+        h2 Commands Flow
+        img(src='images/commands.png' style="width: 100%")
+
+      section
+        img(src='images/data flow.png' style="width: 100%")
+
+      section
+        h2 Problems
+        ul
+          li Latency
+          li no reuse
+          li complex
+          li lot of moving parts
+
+      section(data-bespoke-backdrop="node").trans
+
+      section
+        h2 How can Node help?
+
+      section
+        h2 Isomorphic
+        img(src="images/js.png" style="height: 50%")
         ul.bullet
-          li via sensors
-          li connected to hardware
-          li hopefully running node :)
+          li use the same libraries in
+           | browsers, servers, and devices
+          li simple architecture, fewer components
+
+      section
+        h2 Flow control is built-in
+        h3 If applications sends too much data,
+         | we can slow them down with backpressure!
+        pre
+          code.language-javascript.
+            function process(data, cb) {
+              // oh yeah, we are processing one
+              // thing at a time
+              // or we can do batches!
+              setTimeout(cb, 500)
+            }
+
+      section
+        h2 The best community ever
+        h3 we love you too, npm
+
+      section
+        h2 IoT in practice!
+
+      section
+        h2 Controlling the real world
+        ul.bullet
+          li via sensors and actuators
+          li wired to some silicon
+          li hopefully running Javascript :)
+          li and connected to the Internet
 
       section
         #lux
@@ -96,7 +153,6 @@ html
                 client.end()
               }, 5000)
             })
-
 
       section.full-imgs
         img(src='images/me.png')

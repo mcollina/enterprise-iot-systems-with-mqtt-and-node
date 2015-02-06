@@ -67,6 +67,7 @@ function lux(client) {
     deck.on('activate', function() {
       var el = document.querySelector(".bespoke-active #lux");
       if (el) {
+        render()
         interval = setInterval(render, 1000);
       }
       return true;
