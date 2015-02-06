@@ -182,6 +182,47 @@ html
             })
 
       section
+        h2 Publishing a configuration
+        pre
+          code(data-bespoke-autorun).language-javascript.
+            var client = mqtt.connect()
+            var config = JSON.stringify({
+              enabled: "false"
+            })
+
+            client.publish("edison/config", config, {
+              retain: true
+            })
+            client.end()
+
+      section
+        h2 Setting a configuration
+        pre
+          code(data-bespoke-autorun).language-javascript.
+            var client = mqtt.connect()
+
+            client.subscribe("edison/config")
+
+            client.on("message", function(topic, payload) {
+              alert(payload)
+              setTimeout(client.end.bind(client), 20000);
+            })
+
+      section
+        h2 Publishing another configuration
+        pre
+          code(data-bespoke-autorun).language-javascript.
+            var client = mqtt.connect()
+            var config = JSON.stringify({
+              enabled: "true"
+            })
+
+            client.publish("edison/config", config, {
+              retain: true
+            })
+            client.end()
+
+      section
         img(src="images/mosca.png")
         br
         h3 MQTT broker in Node.js
