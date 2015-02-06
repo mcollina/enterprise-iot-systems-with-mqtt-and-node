@@ -134,6 +134,9 @@ html
           li hopefully running Javascript :)
           li and connected to the Internet
 
+      section(data-camera="fullscreen")
+        h1 You should not see this!
+
       section
         #lux
 
@@ -180,6 +183,9 @@ html
                 client.end()
               }, 5000)
             })
+
+      section(data-camera="fullscreen")
+        h1 You should not see this!
 
       section
         h2 Publishing a configuration
@@ -299,6 +305,15 @@ html
 
       section.full-imgs
         img(src='images/me.png')
+
+      section(data-camera="fullscreen")
+        h1 You should not see this!
+
+        pre
+          code(data-bespoke-autorun).language-javascript.
+            var client = mqtt.connect()
+            client.publish("mcyun/lcd", "Good bye!")
+            client.end()
 
       section
         h1 Thanks!
