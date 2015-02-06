@@ -39,7 +39,64 @@ html
           | ..for now :)
 
       section
+        h2 What is an IoT system?
+        br
+        img(src='images/overview.png' style="width: 100%")
+
+      section
+        h2 Acquiring data!
+        ul.bullet
+          li via sensors
+          li connected to hardware
+          li hopefully running node :)
+
+      section
         #lux
+
+        div(style='display: block')
+          button(style='float: left').light-on Light on
+          button(style='float: right').light-off Light off
+
+      section
+        h2 Acquiring data!
+        pre
+          code(data-bespoke-autorun).language-javascript.
+            var client = mqtt.connect()
+
+            client.subscribe("edison/lux/#")
+
+            client.once("message", function(topic, payload) {
+              alert(payload)
+              client.end()
+            })
+
+      section
+        h2 Acquiring with backpressure
+        pre
+          code(data-bespoke-autorun).language-javascript.
+            var client = mqtt.connect()
+
+            client.subscribe("edison/lux/#")
+
+            client.handleMessage = function(packet, cb) {
+              alert(packet.payload)
+              client.end()
+              cb()
+            }
+
+      section
+        h2 Turning on a light
+        pre
+          code(data-bespoke-autorun).language-javascript.
+            var client = mqtt.connect()
+
+            client.publish('edison/led', 'on', function() {
+              setTimeout(function() {
+                client.publish('edison/led', 'off')
+                client.end()
+              }, 5000)
+            })
+
 
       section.full-imgs
         img(src='images/me.png')

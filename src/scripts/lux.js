@@ -38,9 +38,29 @@ function lux(client) {
       target: '#lux',
       x_accessor: 'date',
       y_accessor: 'value',
+      y_label: 'lux',
+      small_text: true,
       interpolate: 'basis'
     })
   }
+
+  function toArray(array) {
+    return Array.prototype.slice.call(array)
+  }
+
+  toArray(document.querySelectorAll(".light-on")).forEach(function(el) {
+    el.onclick = function() {
+      console.log('led on')
+      client.publish('edison/led', 'on')
+    }
+  })
+
+  toArray(document.querySelectorAll(".light-off")).forEach(function(el) {
+    el.onclick = function() {
+      console.log('led off')
+      client.publish('edison/led', 'off')
+    }
+  })
 
   return function(deck) {
 

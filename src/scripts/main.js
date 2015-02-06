@@ -13,19 +13,19 @@ var bespoke = require('bespoke'),
   camera = require('bespoke-camera'),
   jQuery = require('jquery')
   broker = 'ws://test.mosca.io:80',
-  mqtt = require('mqtt').connect(broker),
+  client = require('mqtt').connect(broker),
   forms = require('bespoke-forms');
 
 global.jQuery = jQuery;
 global.$ = jQuery;
 var lux = require('./lux');
 
-mqtt.on('connect', function() {
+client.on('connect', function() {
   console.log('connected to', broker);
-  mqtt.subscribe('$SYS/#/publish/received');
+  client.subscribe('$SYS/#/publish/received');
 });
 
-mqtt.on('message', function(topic, payload) {
+client.on('message', function(topic, payload) {
   var el = document.querySelector("#broker-stats");
   if (topic.indexOf('publish/received') >= 0) {
     el.textContent = "Total messages " + payload.toString();
@@ -45,11 +45,20 @@ bespoke.from('article', [
   hash(),
   progress(),
   forms(),
-  lux(mqtt)
+  lux(client)
 ]);
 
 // Prism syntax highlighting
 // This is actually loaded from "bower_components" thanks to
 // debowerify: https://github.com/eugeneware/debowerify
 require('prism');
+
+var fakeMqtt = Object.create(require('mqtt'));
+
+fakeMqtt._connect = fakeMqtt.connect;
+fakeMqtt.connect = function() {
+  return this._connect(broker);
+};
+
+window.mqtt = fakeMqtt;
 
