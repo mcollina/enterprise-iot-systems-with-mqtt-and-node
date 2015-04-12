@@ -20,7 +20,6 @@ html
         h2 by&nbsp;
           a(href="http://twitter.com/matteocollina") Matteo Collina
 
-
       section(data-bespoke-backdrop="crane").trans
         h2(style="margin-left: -100px") An IoT system
 
@@ -306,13 +305,16 @@ html
       section.full-imgs
         img(src='images/me.png')
 
+      section.full-imgs
+        img(src='images/nearform.svg')
+
       section(data-camera="fullscreen")
         h1 You should not see this!
 
         pre
           code(data-bespoke-autorun).language-javascript.
             var client = mqtt.connect()
-            client.publish("mcyun/lcd", "Good bye!")
+            client.publish("mcyun/lcd", "Goodbye!")
             client.end()
 
       section
