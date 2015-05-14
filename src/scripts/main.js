@@ -12,8 +12,8 @@ var bespoke = require('bespoke'),
   run = require('bespoke-run'),
   camera = require('bespoke-camera'),
   jQuery = require('jquery')
-  //broker = 'ws://test.mosca.io:80',
-  broker = 'ws://localhost:3000',
+  broker = 'ws://test.mosca.io:80',
+  //broker = 'ws://localhost:3000',
   client = require('mqtt').connect(broker),
   forms = require('bespoke-forms');
 

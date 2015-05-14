@@ -258,7 +258,7 @@ html
             function authClient(client, user, pass, cb) {
               var authorized = (
                 user=== 'alice' &&
-                pass.toString() ==) 'secret' );
+                pass.toString() == 'secret' );
               if (authorized) client.user = user;
               callback(null, authorized);
             }
@@ -307,15 +307,6 @@ html
 
       section.full-imgs
         img(src='images/nearform.svg')
-
-      section(data-camera="fullscreen")
-        h1 You should not see this!
-
-        pre
-          code(data-bespoke-autorun).language-javascript.
-            var client = mqtt.connect()
-            client.publish("mcyun/lcd", "Goodbye!")
-            client.end()
 
       section
         h1 Thanks!
